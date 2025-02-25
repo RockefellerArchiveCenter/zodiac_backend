@@ -1,13 +1,13 @@
-version: '3'
-
 services:
   db:
-    image: postgres:10.4
+    image: postgres:14.12
+    environment:
+      - POSTGRES_PASSWORD=postgres
     volumes:
       - dbvolume:/var/lib/postgresql/data/
   web:
     build: .
-    # entrypoint: /code/entrypoint.sh
+    entrypoint: /code/entrypoint.sh
     environment:
       - APPLICATION_PORT=${APPLICATION_PORT:-8000}
     volumes:
