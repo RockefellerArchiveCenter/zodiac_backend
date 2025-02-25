@@ -1,10 +1,12 @@
-from rest_framework.serializers import (HyperlinkedModelSerializer,
+from rest_framework.serializers import (CharField, HyperlinkedModelSerializer,
                                         SerializerMethodField)
 
 from .models import Event, Package
 
 
 class PackageSerializer(HyperlinkedModelSerializer):
+    identifier = CharField()
+
     class Meta:
         model = Package
         fields = '__all__'
@@ -31,6 +33,8 @@ class PackageEventSerializer(HyperlinkedModelSerializer):
 
 
 class EventSerializer(HyperlinkedModelSerializer):
+    identifier = CharField()
+
     class Meta:
         model = Event
         fields = '__all__'

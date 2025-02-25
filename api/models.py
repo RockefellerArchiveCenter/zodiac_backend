@@ -13,7 +13,7 @@ class Package(models.Model):
         ('legacy_digital', 'Legacy Born Digital'),
         ('av_digitization', 'AV Digitization'),
     ]
-    identifier = models.CharField(max_length=36)
+    identifier = models.CharField(max_length=36, primary_key=True)
     origin = models.CharField(choices=ORIGINS, max_length=20)
     title = models.CharField(max_length=255)
     identifiers = models.JSONField(blank=True, null=True)
@@ -34,7 +34,7 @@ class Event(models.Model):
         ('webhook', 'Webhook'),
         ('aquarius', 'Aquarius')
     ]
-    identifier = models.CharField(max_length=36)
+    identifier = models.CharField(max_length=36, primary_key=True)
     outcome = models.CharField(choices=OUTCOMES)
     service = models.CharField(choices=SERVICES)
     package = models.ForeignKey(Package, on_delete=models.CASCADE)
