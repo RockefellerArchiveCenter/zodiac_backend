@@ -18,6 +18,8 @@ class Package(models.Model):
     title = models.CharField(max_length=255)
     identifiers = models.JSONField(blank=True, null=True)
     rights_statements = models.JSONField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
 
 
 class Event(models.Model):
@@ -36,3 +38,5 @@ class Event(models.Model):
     outcome = models.CharField(choices=OUTCOMES)
     service = models.CharField(choices=SERVICES)
     package = models.ForeignKey(Package, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
