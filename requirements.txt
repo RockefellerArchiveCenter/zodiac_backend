@@ -5,12 +5,17 @@
 #    pip-compile
 #
 asgiref==3.8.1
-    # via django
+    # via
+    #   django
+    #   django-cors-headers
 django==5.1.6
     # via
     #   -r requirements.in
+    #   django-cors-headers
     #   django-filter
     #   djangorestframework
+django-cors-headers==4.7.0
+    # via -r requirements.in
 django-filter==25.1
     # via -r requirements.in
 djangorestframework==3.15.2
