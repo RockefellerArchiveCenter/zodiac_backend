@@ -1,0 +1,40 @@
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class User(AbstractUser):
+    pass
+
+
+class Package(models.Model):
+    ORIGINS = [
+        ('aurora', 'Aurora'),
+        ('digitization', 'Digitization'),
+        ('legacy_digital', 'Legacy Born Digital'),
+        ('av_digitization', 'AV Digitization'),
+    ]
+    identifier = models.CharField(max_length=36)
+    origin = models.CharField(choices=ORIGINS, max_length=20)
+    identifiers = models.JSONField(blank=True, null=True)
+    archivesspace_identifier = models.CharField(max_length=255, blank=True, null=True)
+    aurora_accession_identifier = models.CharField(max_length=255, blank=True, null=True)
+    rights_statements = models.JSONField(blank=True, null=True)
+    metadata = models.JSONField(blank=True, null=True)
+
+
+class Event(models.Model):
+    OUTCOMES = [
+        ('STARTED', 'Started'),
+        ('SUCCESS', 'Success'),
+        ('FAILURE', 'Failure'),
+    ]
+    SERVICES = [
+        ('ursa_major', 'Ursa Major'),
+        ('fornax', 'Fornax'),
+        ('webhook', 'Webhook'),
+        ('aquarius', 'Aquarius')
+    ]
+    identifier = models.CharField(max_length=36)
+    outcome = models.CharField(choices=OUTCOMES)
+    service = models.CharField(choices=SERVICES)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE)
