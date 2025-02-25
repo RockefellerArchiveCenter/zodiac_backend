@@ -15,11 +15,9 @@ class Package(models.Model):
     ]
     identifier = models.CharField(max_length=36)
     origin = models.CharField(choices=ORIGINS, max_length=20)
+    title = models.CharField(max_length=255)
     identifiers = models.JSONField(blank=True, null=True)
-    archivesspace_identifier = models.CharField(max_length=255, blank=True, null=True)
-    aurora_accession_identifier = models.CharField(max_length=255, blank=True, null=True)
     rights_statements = models.JSONField(blank=True, null=True)
-    metadata = models.JSONField(blank=True, null=True)
 
 
 class Event(models.Model):
