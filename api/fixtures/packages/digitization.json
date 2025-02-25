@@ -1,0 +1,25 @@
+{
+    "origin": "digitization",
+    "identifier": "8bf992c0-1547-403a-93d4-ac531e7ed080",
+    "title": "Diary, 1957-1958",
+    "rights_statements": [
+        {
+            "end_date": "2071-12-31",
+            "basis_note": "Copyright term 120 years from date of creation.",
+            "start_date": "1949-01-01",
+            "jurisdiction": "us",
+            "rights_basis": "copyright",
+            "rights_granted": [],
+            "copyright_status": "copyrighted",
+            "determination_date": "2021-09-27"
+        },
+        {
+            "end_date": null,
+            "basis_note": "This material can be made available online immediately.",
+            "start_date": "2010-01-01",
+            "other_basis": "donor",
+            "rights_basis": "other",
+            "rights_granted": []
+        }
+    ]
+}
