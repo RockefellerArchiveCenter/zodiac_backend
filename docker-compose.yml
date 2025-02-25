@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:10.4
+    volumes:
+      - dbvolume:/var/lib/postgresql/data/
+  web:
+    build: .
+    # entrypoint: /code/entrypoint.sh
+    environment:
+      - APPLICATION_PORT=${APPLICATION_PORT:-8000}
+    volumes:
+      - .:/code
+    ports:
+      - "${APPLICATION_PORT:-8000}:${APPLICATION_PORT:-8000}"
+    depends_on:
+      - db
+
+volumes:
+  dbvolume:
