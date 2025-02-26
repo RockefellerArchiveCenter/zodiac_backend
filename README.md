@@ -23,6 +23,13 @@ Or, if you want to remove all data
     $ docker compose down -v
 
 
+## Sample Data
+
+Sample data can be loaded by running the command:
+
+    $ docker compose exec web python manage.py loaddata api/fixtures/initial.json
+
+
 ## Configuring
 
 Argo configurations are stored in `/zodiac_backend/config.py`. This file is excluded from version control, and you will need to update this file with values for your local instance.
