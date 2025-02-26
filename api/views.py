@@ -6,8 +6,8 @@ from rest_framework.viewsets import ModelViewSet
 
 from .clients import AWSClient
 from .models import Event, Package
-from .serializers import (EventSerializer, PackageEventSerializer,
-                          PackageListSerializer, PackageSerializer)
+from .serializers import (EventSerializer, PackageListSerializer,
+                          PackageSerializer)
 
 
 class PackageViewSet(ModelViewSet):
@@ -25,7 +25,7 @@ class PackageViewSet(ModelViewSet):
     def events(self, request, pk=None):
         """Show events related to a package."""
         package = get_object_or_404(Package, pk=pk)
-        serializer = PackageEventSerializer(
+        serializer = EventSerializer(
             package.event_set.all().order_by('-created'),
             context={'request': request},
             many=True)

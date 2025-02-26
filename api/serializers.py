@@ -27,12 +27,6 @@ class PackageListSerializer(HyperlinkedModelSerializer):
         return None
 
 
-class PackageEventSerializer(HyperlinkedModelSerializer):
-    class Meta:
-        model = Event
-        fields = ['url', 'identifier', 'outcome', 'service']
-
-
 class EventSerializer(HyperlinkedModelSerializer):
     identifier = CharField()
     package_identifier = PrimaryKeyRelatedField(
