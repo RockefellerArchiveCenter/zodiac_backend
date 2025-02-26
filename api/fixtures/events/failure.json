@@ -2,5 +2,5 @@
     "identifier": "f78742e5-6af9-4756-a94a-6cd297406d55",
     "service": "ursa_major",
     "outcome": "FAILURE",
-    "package": "/packages/f78742e5-6af9-4756-a94a-6cd297406d51"
+    "package_identifier": "/packages/f78742e5-6af9-4756-a94a-6cd297406d51"
 }

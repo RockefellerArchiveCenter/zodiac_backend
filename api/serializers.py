@@ -35,7 +35,7 @@ class PackageEventSerializer(HyperlinkedModelSerializer):
 
 class EventSerializer(HyperlinkedModelSerializer):
     identifier = CharField()
-    package = PrimaryKeyRelatedField(
+    package_identifier = PrimaryKeyRelatedField(
         queryset=Package.objects.all(),
         many=False)
 

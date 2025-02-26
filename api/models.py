@@ -37,6 +37,6 @@ class Event(models.Model):
     identifier = models.CharField(max_length=36, primary_key=True)
     outcome = models.CharField(choices=OUTCOMES)
     service = models.CharField(choices=SERVICES)
-    package = models.ForeignKey(Package, on_delete=models.CASCADE)
+    package_identifier = models.ForeignKey(Package, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
