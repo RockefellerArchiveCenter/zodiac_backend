@@ -1,6 +1,7 @@
 {
     "identifier": "f78742e5-6af9-4756-a94a-6cd297406d56",
-    "service": "ursa_major",
+    "service": "fornax",
     "outcome": "STARTED",
+    "message": "SIP assembly started.",
     "package_identifier": "f78742e5-6af9-4756-a94a-6cd297406d51"
 }

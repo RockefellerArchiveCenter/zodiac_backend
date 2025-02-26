@@ -2,5 +2,6 @@
     "identifier": "f78742e5-6af9-4756-a94a-6cd297406d57",
     "service": "ursa_major",
     "outcome": "SUCCESS",
+    "message": "Package discovered.",
     "package_identifier": "f78742e5-6af9-4756-a94a-6cd297406d51"
 }

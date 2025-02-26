@@ -38,5 +38,7 @@ class Event(models.Model):
     outcome = models.CharField(choices=OUTCOMES)
     service = models.CharField(choices=SERVICES)
     package_identifier = models.ForeignKey(Package, on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    traceback = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)

@@ -1,6 +1,8 @@
 {
     "identifier": "f78742e5-6af9-4756-a94a-6cd297406d55",
-    "service": "ursa_major",
+    "service": "fornax",
     "outcome": "FAILURE",
+    "message": "Error unpacking bag.",
+    "traceback": "Could not find file /tmp/f78742e5-6af9-4756-a94a-6cd297406d55 \n  in transform.py line 23",
     "package_identifier": "/packages/f78742e5-6af9-4756-a94a-6cd297406d51"
 }
