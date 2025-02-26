@@ -17,7 +17,9 @@ Including another URLconf
 from django.urls import include, path
 
 from api.routers import router
+from api.views import RestartServiceView
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('restart-service/', RestartServiceView.as_view(), name='restart-service'),
 ]
