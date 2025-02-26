@@ -28,7 +28,7 @@ class PackageViewSet(ModelViewSet):
         """Show events related to a package."""
         package = get_object_or_404(Package, pk=pk)
         serializer = PackageEventSerializer(
-            package.event_set.all().order_by('created'),
+            package.event_set.all().order_by('-created'),
             context={'request': request},
             many=True)
         return Response(serializer.data)
