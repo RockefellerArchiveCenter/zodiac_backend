@@ -8,6 +8,16 @@ asgiref==3.8.1
     # via
     #   django
     #   django-cors-headers
+aws-assume-role-lib==2.10.0
+    # via -r requirements.in
+boto3==1.37.1
+    # via
+    #   -r requirements.in
+    #   aws-assume-role-lib
+botocore==1.37.1
+    # via
+    #   boto3
+    #   s3transfer
 django==5.1.6
     # via
     #   -r requirements.in
@@ -20,7 +30,19 @@ django-filter==25.1
     # via -r requirements.in
 djangorestframework==3.15.2
     # via -r requirements.in
+jmespath==1.0.1
+    # via
+    #   boto3
+    #   botocore
 psycopg2==2.9.10
     # via -r requirements.in
+python-dateutil==2.9.0.post0
+    # via botocore
+s3transfer==0.11.2
+    # via boto3
+six==1.17.0
+    # via python-dateutil
 sqlparse==0.5.3
     # via django
+urllib3==2.3.0
+    # via botocore

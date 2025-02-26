@@ -153,3 +153,8 @@ REST_FRAMEWORK = {
 # https://github.com/adamchainz/django-cors-headers
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# AWS settings
+AWS_REGION = config.AWS_REGION
+AWS_ROLE_ARN = config.AWS_ROLE_ARN
+AWS_SNS_TOPIC_ARN = config.AWS_SNS_TOPIC_ARN
