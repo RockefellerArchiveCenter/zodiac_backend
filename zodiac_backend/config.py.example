@@ -7,7 +7,7 @@ SQL_ENGINE = "django.db.backends.postgresql" # the database engine used by Argo 
 SQL_DATABASE = "postgres"  # name of the application database (string)
 SQL_USER = "postgres"  # name of the application database user (string)
 SQL_PASSWORD = "postgres"  # password for the application database (string)
-SQL_HOST = "argo-db"  # host for the application database (string)
+SQL_HOST = "db"  # host for the application database (string)
 SQL_PORT = 5432  # port on which the application database can be reached (integer)
 
 USE_X_FORWARDED_HOST = False # Set to True if the application is behind a reverse proxy (boolean)
