@@ -1,4 +1,5 @@
 from rest_framework.serializers import (CharField, HyperlinkedModelSerializer,
+                                        HyperlinkedRelatedField,
                                         PrimaryKeyRelatedField,
                                         SerializerMethodField)
 
@@ -32,6 +33,14 @@ class EventSerializer(HyperlinkedModelSerializer):
     package_identifier = PrimaryKeyRelatedField(
         queryset=Package.objects.all(),
         many=False)
+    package_origin = CharField(source='package_identifier.origin')
+    package_title = CharField(source='package_identifier.title')
+    package_url = HyperlinkedRelatedField(
+        source='package_identifier',
+        view_name='package-detail',
+        queryset=Package.objects.all(),
+        many=False
+    )
 
     class Meta:
         model = Event
