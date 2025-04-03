@@ -5,7 +5,13 @@
         "fields": {
             "origin": "digitization",
             "title": "Diary, 1957-1958",
-            "identifiers": null,
+            "identifiers": {
+                "aurora_package": "https://aurora.dev.rockarch.org/api/transfers/1631/?format=json",
+                "aurora_accession": "https://aurora.dev.rockarch.org/api/accessions/237/",
+                "archivesspace_accession": "/repositories/2/accessions/4172",
+                "archivesspace_resource": "/repositories/2/resources/123",
+                "archivematica_uuid": "0a9c6171-a18d-4ff6-b9e7-bef01aaded10"
+            },
             "rights_statements": [
                 {
                     "end_date": "2071-12-31",
@@ -37,7 +43,14 @@
             "origin": "aurora",
             "title": "Organizational Charts",
             "identifiers": {
-                "aurora_package": "https://aurora.rockarch.org/api/transfers/19/"
+                "aurora_accession": "https://aurora.dev.rockarch.org/api/accessions/237/",
+                "aurora_package": "https://aurora.dev.rockarch.org/api/transfers/1631/?format=json",
+                "archivesspace_accession": "/repositories/2/accessions/4172",
+                "archivesspace_resource": "/repositories/2/resources/123",
+                "archivesspace_group": "/repositories/2/archival_objects/4753",
+                "archivesspace_archival_object": "/repositories/2/archival_objects/2153",
+                "archivematica_uuid": "0a9c6171-a18d-4ff6-b9e7-bef01aaded10",
+                "archivesspace_digital_objects": ["/repositories/2/digital_objects/3"]
             },
             "rights_statements": [
                 {
