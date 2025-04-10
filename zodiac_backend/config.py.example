@@ -1,7 +1,7 @@
 DJANGO_DEBUG = True  # run Django in debug mode, which outputs stack traces to the UI, set to False for production (boolean)
 DJANGO_SECRET_KEY = "sx6mf&q*eifhk^(cx197+=*cuq0guy$43!+hy#g1l4orkklx$g"  # used by Django to create hashes (string)
 DJANGO_STATIC_URL = "/static/"  # URL for static assets used by Django (string)
-DJANGO_ALLOWED_HOSTS = ["localhost", "argo-web"]  # hosts Argo will respond to (list of strings)
+DJANGO_ALLOWED_HOSTS = ["localhost"]  # hosts application will respond to (list of strings)
 
 SQL_ENGINE = "django.db.backends.postgresql" # the database engine used by Argo (string, one of django.db.backends)
 SQL_DATABASE = "postgres"  # name of the application database (string)
@@ -9,9 +9,6 @@ SQL_USER = "postgres"  # name of the application database user (string)
 SQL_PASSWORD = "postgres"  # password for the application database (string)
 SQL_HOST = "db"  # host for the application database (string)
 SQL_PORT = 5432  # port on which the application database can be reached (integer)
-
-USE_X_FORWARDED_HOST = False # Set to True if the application is behind a reverse proxy (boolean)
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https") # If the application is being a reverse proxy, and if a header value indicates an HTTPS connection proxied over HTTP, name that header and value (tuple)
 
 AWS_REGION = "us-east-1" # AWS region in which target SNS topic is located. (string)
 AWS_ROLE_ARN = "arn:aws:iam::123456789012:role/zodiac_backend_role" # ARN for AWS IAM Role with permissions to publish messages to SNS topic (string)
