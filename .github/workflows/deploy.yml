@@ -19,7 +19,7 @@ jobs:
       AWS_BUCKET_NAME: "${{ github.ref_name == 'development' && 'rac-dev-deploy' || 'rac-prod-deploy' }}"
       DEPLOY_ZIP_DIR: "${{ github.ref_name == 'development' && 'build-dev' || 'build-prod' }}"
       DEPLOY_ZIP_NAME: zodiac_backend.zip
-      DEPLOYMENT_GROUP: # TODO
+      DEPLOYMENT_GROUP: "${{ github.ref_name == 'development' && 'ZodiacBackendDevelopment' || 'ZodiacBackendProduction' }}"
 
     steps:
       - name: Checkout code
