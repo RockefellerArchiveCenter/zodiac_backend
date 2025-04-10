@@ -52,7 +52,6 @@ jobs:
           mv appspec.yml.deploy appspec.yml
           mv deploy_scripts/curl_index.sh.deploy deploy_scripts/curl_index.sh
           mv deploy_scripts/install_dependencies_django.sh.deploy deploy_scripts/install_dependencies_django.sh
-          mv deploy_scripts/restart_httpd.sh deploy_scripts/restart_httpd.sh
           mv deploy_scripts/run_management_commands_django.sh.deploy deploy_scripts/run_management_commands_django.sh
           mv deploy_scripts/set_permissions.sh.deploy deploy_scripts/set_permissions.sh
 
