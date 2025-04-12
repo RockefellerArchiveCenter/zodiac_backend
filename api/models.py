@@ -29,10 +29,10 @@ class Event(models.Model):
         ('FAILURE', 'Failure'),
     ]
     SERVICES = [
-        ('ursa_major', 'Ursa Major'),
-        ('fornax', 'Fornax'),
-        ('webhook', 'Webhook'),
-        ('aquarius', 'Aquarius')
+        ('digital_ingest_discovery', 'Discovery'),
+        ('digital_ingest_assembly', 'Assembly'),
+        ('digital_ingest_webhook', 'Webhook'),
+        ('digital_ingest_transformation', 'Transformation')
     ]
     identifier = models.CharField(max_length=36, primary_key=True)
     outcome = models.CharField(choices=OUTCOMES)
