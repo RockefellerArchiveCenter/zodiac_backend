@@ -69,6 +69,21 @@ class ViewTests(TestCase):
         self.assertEqual(output.status_code, 500)
         self.assertEqual(output.data, "Error sending restart message: error")
 
+    def test_partial_update(self):
+        package_id = "8bf992c0-1547-403a-93d4-ac531e7ed080"
+        initial_package = Package.objects.get(identifier=package_id)
+        initial_identifiers = initial_package.identifiers
+
+        output = self.client.patch(
+            reverse('package-detail', kwargs={"pk": package_id}),
+            data=json.dumps({"identifiers": {"new_id": "bar"}}),
+            headers={"Content-Type": "application/json"}
+        ).json()
+
+        self.assertEqual(len(initial_identifiers.keys()) + 1, len(output['identifiers'].keys()))
+        for k, v in initial_identifiers.items():
+            self.assertEqual(output['identifiers'][k], v)
+
 
 class AWSClientTests(TestCase):
 
