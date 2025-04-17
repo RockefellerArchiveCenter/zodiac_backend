@@ -21,6 +21,12 @@ class PackageViewSet(ModelViewSet):
             return PackageListSerializer
         return PackageSerializer
 
+    def partial_update(self, request, pk=None):
+        """Merge identifiers."""
+        instance = self.get_object()
+        request.data['identifiers'].update(instance.identifiers)
+        return super().partial_update(request, pk)
+
     @action(detail=True)
     def events(self, request, pk=None):
         """Show events related to a package."""
