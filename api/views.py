@@ -24,7 +24,9 @@ class PackageViewSet(ModelViewSet):
     def partial_update(self, request, pk=None):
         """Merge identifiers."""
         instance = self.get_object()
-        request.data.get('identifiers', {}).update(instance.identifiers)
+        identifiers = instance.identifiers if instance.identifiers else {}
+        identifiers.update(request.data.get('identifiers', {}))
+        request.data['identifiers'] = identifiers
         return super().partial_update(request, pk)
 
     @action(detail=True)

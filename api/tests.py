@@ -84,6 +84,14 @@ class ViewTests(TestCase):
         for k, v in initial_identifiers.items():
             self.assertEqual(output['identifiers'][k], v)
 
+        output = self.client.patch(
+            reverse('package-detail', kwargs={"pk": package_id}),
+            data=json.dumps({"identifiers": {"new_id": "baz"}}),
+            headers={"Content-Type": "application/json"}
+        ).json()
+
+        self.assertEqual(output['identifiers']['new_id'], 'baz')
+
 
 class AWSClientTests(TestCase):
 
