@@ -51,8 +51,8 @@ class RestartServiceView(APIView):
 
     def post(self, request, **kwargs):
         try:
-            service = request.POST['service']
-            package_id = request.POST['package_id']
+            service = request.data['service']
+            package_id = request.data['package_id']
         except KeyError:
             return Response("Post data must include both service and package_id.", status=500)
 
