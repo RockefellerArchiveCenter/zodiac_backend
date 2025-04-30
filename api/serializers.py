@@ -11,6 +11,7 @@ class PackageSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Package
         fields = '__all__'
+        datatables_always_serialize = ('identifier',)
 
 
 class PackageListSerializer(HyperlinkedModelSerializer):
@@ -36,3 +37,4 @@ class EventSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
+        datatables_always_serialize = ('identifier',)
