@@ -9,22 +9,27 @@ from moto import mock_aws
 from moto.core import DEFAULT_ACCOUNT_ID
 
 from .clients import AWSClient
-from .models import Package
-from .serializers import PackageListSerializer
+from .models import Event, Package
 
 
-class SerializerTests(TestCase):
-    fixtures = ['api/fixtures/initial.json']
+class SignalTests(TestCase):
 
-    def test_last_outcome(self):
-        serializer = PackageListSerializer()
-
-        for package_id, expected in [
-                ("f78742e5-6af9-4756-a94a-6cd297406d51", "FAILURE"),
-                ("8bf992c0-1547-403a-93d4-ac531e7ed080", None)]:
-            package = Package.objects.get(pk=package_id)
-            last_outcome = serializer.get_last_outcome(package)
-            self.assertEqual(last_outcome, expected,)
+    def test_update_last_outcome(self):
+        """Asserts last_outcome field is correctly updated."""
+        package = Package.objects.create(
+            identifier="f78742e5-6af9-4756-a94a-6cd297406d51",
+            origin="aurora",
+            title="Organizational Charts")
+        self.assertEqual(package.last_outcome, None)
+        Event.objects.create(
+            identifier="f78742e5-6af9-4756-a94a-6cd297406d55",
+            outcome="FAILURE",
+            service="fornax",
+            package_identifier=package,
+            message="Could not find file /tmp/f78742e5-6af9-4756-a94a-6cd297406d55 \n  in transform.py line 23",
+        )
+        package.refresh_from_db()
+        self.assertEqual(package.last_outcome, "FAILURE")
 
 
 class ViewTests(TestCase):
