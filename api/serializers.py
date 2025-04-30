@@ -1,7 +1,6 @@
 from rest_framework.serializers import (CharField, HyperlinkedModelSerializer,
                                         HyperlinkedRelatedField,
-                                        PrimaryKeyRelatedField,
-                                        SerializerMethodField)
+                                        PrimaryKeyRelatedField)
 
 from .models import Event, Package
 
@@ -15,17 +14,9 @@ class PackageSerializer(HyperlinkedModelSerializer):
 
 
 class PackageListSerializer(HyperlinkedModelSerializer):
-    last_outcome = SerializerMethodField()
-
     class Meta:
         model = Package
         fields = ['url', 'identifier', 'origin', 'title', 'last_outcome']
-
-    def get_last_outcome(self, obj):
-        package_events = obj.event_set.all()
-        if len(package_events):
-            return package_events.order_by('-last_modified')[0].outcome
-        return None
 
 
 class EventSerializer(HyperlinkedModelSerializer):
