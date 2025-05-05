@@ -9,22 +9,27 @@ from moto import mock_aws
 from moto.core import DEFAULT_ACCOUNT_ID
 
 from .clients import AWSClient
-from .models import Package
-from .serializers import PackageListSerializer
+from .models import Event, Package
 
 
-class SerializerTests(TestCase):
-    fixtures = ['api/fixtures/initial.json']
+class SignalTests(TestCase):
 
-    def test_last_outcome(self):
-        serializer = PackageListSerializer()
-
-        for package_id, expected in [
-                ("f78742e5-6af9-4756-a94a-6cd297406d51", "FAILURE"),
-                ("8bf992c0-1547-403a-93d4-ac531e7ed080", None)]:
-            package = Package.objects.get(pk=package_id)
-            last_outcome = serializer.get_last_outcome(package)
-            self.assertEqual(last_outcome, expected,)
+    def test_update_last_outcome(self):
+        """Asserts last_outcome field is correctly updated."""
+        package = Package.objects.create(
+            identifier="f78742e5-6af9-4756-a94a-6cd297406d51",
+            origin="aurora",
+            title="Organizational Charts")
+        self.assertEqual(package.last_outcome, None)
+        Event.objects.create(
+            identifier="f78742e5-6af9-4756-a94a-6cd297406d55",
+            outcome="FAILURE",
+            service="fornax",
+            package_identifier=package,
+            message="Could not find file /tmp/f78742e5-6af9-4756-a94a-6cd297406d55 \n  in transform.py line 23",
+        )
+        package.refresh_from_db()
+        self.assertEqual(package.last_outcome, "FAILURE")
 
 
 class ViewTests(TestCase):
@@ -68,6 +73,29 @@ class ViewTests(TestCase):
         output = self.client.post(reverse('restart-service'), data={"package_id": "foo", "service": "bar"})
         self.assertEqual(output.status_code, 500)
         self.assertEqual(output.data, "Error sending restart message: error")
+
+    def test_partial_update(self):
+        package_id = "8bf992c0-1547-403a-93d4-ac531e7ed080"
+        initial_package = Package.objects.get(identifier=package_id)
+        initial_identifiers = initial_package.identifiers
+
+        output = self.client.patch(
+            reverse('package-detail', kwargs={"pk": package_id}),
+            data=json.dumps({"identifiers": {"new_id": "bar"}}),
+            headers={"Content-Type": "application/json"}
+        ).json()
+
+        self.assertEqual(len(initial_identifiers.keys()) + 1, len(output['identifiers'].keys()))
+        for k, v in initial_identifiers.items():
+            self.assertEqual(output['identifiers'][k], v)
+
+        output = self.client.patch(
+            reverse('package-detail', kwargs={"pk": package_id}),
+            data=json.dumps({"identifiers": {"new_id": "baz"}}),
+            headers={"Content-Type": "application/json"}
+        ).json()
+
+        self.assertEqual(output['identifiers']['new_id'], 'baz')
 
 
 class AWSClientTests(TestCase):

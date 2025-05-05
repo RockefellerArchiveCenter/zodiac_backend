@@ -21,6 +21,14 @@ class PackageViewSet(ModelViewSet):
             return PackageListSerializer
         return PackageSerializer
 
+    def partial_update(self, request, pk=None):
+        """Merge identifiers."""
+        instance = self.get_object()
+        identifiers = instance.identifiers if instance.identifiers else {}
+        identifiers.update(request.data.get('identifiers', {}))
+        request.data['identifiers'] = identifiers
+        return super().partial_update(request, pk)
+
     @action(detail=True)
     def events(self, request, pk=None):
         """Show events related to a package."""
@@ -43,8 +51,8 @@ class RestartServiceView(APIView):
 
     def post(self, request, **kwargs):
         try:
-            service = request.POST['service']
-            package_id = request.POST['package_id']
+            service = request.data['service']
+            package_id = request.data['package_id']
         except KeyError:
             return Response("Post data must include both service and package_id.", status=500)
 

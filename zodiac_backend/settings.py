@@ -28,8 +28,6 @@ SECRET_KEY = config.DJANGO_SECRET_KEY
 DEBUG = config.DJANGO_DEBUG
 
 ALLOWED_HOSTS = config.DJANGO_ALLOWED_HOSTS
-USE_X_FORWARDED_HOST = config.USE_X_FORWARDED_HOST
-SECURE_PROXY_SSL_HEADER = config.SECURE_PROXY_SSL_HEADER
 
 AUTH_USER_MODEL = 'api.User'
 
@@ -44,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
+    'rest_framework_datatables',
     'django_filters',
     'corsheaders',
 ]
@@ -119,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
@@ -129,7 +128,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -141,11 +141,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
-        'rest_framework.pagination.PageNumberPagination',
+        'rest_framework_datatables.pagination.DatatablesPageNumberPagination',
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
+        'rest_framework_datatables.renderers.DatatablesRenderer',
     ),
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework_datatables.filters.DatatablesFilterBackend',
+    ],
     'PAGE_SIZE': 50,
 }
 

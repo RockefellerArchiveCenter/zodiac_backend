@@ -13,6 +13,11 @@ class Package(models.Model):
         ('legacy_digital', 'Legacy Born Digital'),
         ('av_digitization', 'AV Digitization'),
     ]
+    OUTCOMES = [
+        ('STARTED', 'Started'),
+        ('SUCCESS', 'Success'),
+        ('FAILURE', 'Failure'),
+    ]
     identifier = models.CharField(max_length=36, primary_key=True)
     origin = models.CharField(choices=ORIGINS, max_length=20)
     title = models.CharField(max_length=255)
@@ -20,6 +25,7 @@ class Package(models.Model):
     rights_statements = models.JSONField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+    last_outcome = models.CharField(choices=OUTCOMES, blank=True, null=True)
 
 
 class Event(models.Model):
@@ -29,10 +35,10 @@ class Event(models.Model):
         ('FAILURE', 'Failure'),
     ]
     SERVICES = [
-        ('ursa_major', 'Ursa Major'),
-        ('fornax', 'Fornax'),
-        ('webhook', 'Webhook'),
-        ('aquarius', 'Aquarius')
+        ('digital_ingest_discovery', 'Discovery'),
+        ('digital_ingest_assembly', 'Assembly'),
+        ('digital_ingest_webhook', 'Webhook'),
+        ('digital_ingest_transformation', 'Transformation')
     ]
     identifier = models.CharField(max_length=36, primary_key=True)
     outcome = models.CharField(choices=OUTCOMES)
