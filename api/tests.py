@@ -14,22 +14,43 @@ from .models import Event, Package
 
 class SignalTests(TestCase):
 
-    def test_update_last_outcome(self):
-        """Asserts last_outcome field is correctly updated."""
+    def test_update_status(self):
+        """Asserts status field is correctly updated."""
         package = Package.objects.create(
             identifier="f78742e5-6af9-4756-a94a-6cd297406d51",
             origin="aurora",
             title="Organizational Charts")
-        self.assertEqual(package.last_outcome, None)
+        self.assertEqual(package.status, 'IN PROCESS')
+
         Event.objects.create(
             identifier="f78742e5-6af9-4756-a94a-6cd297406d55",
             outcome="FAILURE",
-            service="fornax",
+            service="digital_ingest_discovery",
             package_identifier=package,
             message="Could not find file /tmp/f78742e5-6af9-4756-a94a-6cd297406d55 \n  in transform.py line 23",
         )
         package.refresh_from_db()
-        self.assertEqual(package.last_outcome, "FAILURE")
+        self.assertEqual(package.status, "ERROR")
+
+        Event.objects.create(
+            identifier="f78742e5-6af9-4756-a94a-6cd297406d56",
+            outcome="COMPLETE",
+            service="digital_ingest_discovery",
+            package_identifier=package,
+            message="Discovery complete",
+        )
+        package.refresh_from_db()
+        self.assertEqual(package.status, "IN PROCESS")
+
+        Event.objects.create(
+            identifier="f78742e5-6af9-4756-a94a-6cd297406d57",
+            outcome="SUCCESS",
+            service="digital_ingest_transformation",
+            package_identifier=package,
+            message="Transformation complete",
+        )
+        package.refresh_from_db()
+        self.assertEqual(package.status, "COMPLETE")
 
 
 class ViewTests(TestCase):
