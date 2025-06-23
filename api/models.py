@@ -13,10 +13,10 @@ class Package(models.Model):
         ('legacy_digital', 'Legacy Born Digital'),
         ('av_digitization', 'AV Digitization'),
     ]
-    OUTCOMES = [
-        ('STARTED', 'Started'),
-        ('SUCCESS', 'Success'),
-        ('FAILURE', 'Failure'),
+    STATUSES = [
+        ('IN PROCESS', 'In Process'),
+        ('COMPLETE', 'Complete'),
+        ('ERROR', 'Error'),
     ]
     identifier = models.CharField(max_length=36, primary_key=True)
     origin = models.CharField(choices=ORIGINS, max_length=20)
@@ -25,7 +25,7 @@ class Package(models.Model):
     rights_statements = models.JSONField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
-    last_outcome = models.CharField(choices=OUTCOMES, blank=True, null=True)
+    status = models.CharField(choices=STATUSES, default='IN PROCESS')
 
 
 class Event(models.Model):
