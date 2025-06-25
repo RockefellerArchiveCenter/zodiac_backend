@@ -34,7 +34,7 @@ class PackageViewSet(ModelViewSet):
         """Show events related to a package."""
         self.filterset_fields = ['service', 'outcome', 'message']  # set custom filter fields
         package = get_object_or_404(Package, pk=pk)
-        queryset = package.event_set.all()
+        queryset = package.event_set.all().order_by('-created')
         queryset = self.filter_queryset(queryset)  # filter queryset to apply datatables search and sort
         queryset = self.paginate_queryset(queryset)  # paginage queryset
         serializer = EventSerializer(
