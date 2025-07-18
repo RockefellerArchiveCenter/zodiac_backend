@@ -100,6 +100,7 @@ class ViewTests(TestCase):
         initial_package = Package.objects.get(identifier=package_id)
         initial_identifiers = initial_package.identifiers
 
+        # Test adding new identifier
         output = self.client.patch(
             reverse('package-detail', kwargs={"pk": package_id}),
             data=json.dumps({"identifiers": {"new_id": "bar"}}),
@@ -110,6 +111,7 @@ class ViewTests(TestCase):
         for k, v in initial_identifiers.items():
             self.assertEqual(output['identifiers'][k], v)
 
+        # Test updating existing identifier
         output = self.client.patch(
             reverse('package-detail', kwargs={"pk": package_id}),
             data=json.dumps({"identifiers": {"new_id": "baz"}}),
@@ -117,6 +119,13 @@ class ViewTests(TestCase):
         ).json()
 
         self.assertEqual(output['identifiers']['new_id'], 'baz')
+
+        # Test when identifiers value is None.
+        self.client.patch(
+            reverse('package-detail', kwargs={"pk": package_id}),
+            data=json.dumps({"identifiers": None}),
+            headers={"Content-Type": "application/json"}
+        ).json()
 
 
 class AWSClientTests(TestCase):
