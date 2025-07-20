@@ -17,7 +17,7 @@ class PackageSerializer(HyperlinkedModelSerializer):
 class PackageListSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Package
-        fields = ['url', 'identifier', 'origin', 'title', 'last_outcome']
+        fields = ['url', 'identifier', 'origin', 'title', 'status', 'created']
 
 
 class EventSerializer(HyperlinkedModelSerializer):

@@ -25,16 +25,21 @@ class PackageViewSet(ModelViewSet):
         """Merge identifiers."""
         instance = self.get_object()
         identifiers = instance.identifiers if instance.identifiers else {}
-        identifiers.update(request.data.get('identifiers', {}))
+        request_identifiers = request.data.get('identifiers') if request.data.get('identifiers') else {}
+        identifiers.update(request_identifiers)
         request.data['identifiers'] = identifiers
         return super().partial_update(request, pk)
 
     @action(detail=True)
     def events(self, request, pk=None):
         """Show events related to a package."""
+        self.filterset_fields = ['service', 'outcome', 'message']  # set custom filter fields
         package = get_object_or_404(Package, pk=pk)
+        queryset = package.event_set.all().order_by('-created')
+        queryset = self.filter_queryset(queryset)  # filter queryset to apply datatables search and sort
+        queryset = self.paginate_queryset(queryset)  # paginage queryset
         serializer = EventSerializer(
-            package.event_set.all().order_by('-created'),
+            queryset,
             context={'request': request},
             many=True)
         return Response(serializer.data)

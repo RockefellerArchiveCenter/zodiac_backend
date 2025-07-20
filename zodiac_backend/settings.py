@@ -151,6 +151,7 @@ REST_FRAMEWORK = {
         'rest_framework_datatables.filters.DatatablesFilterBackend',
     ],
     'PAGE_SIZE': 50,
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",
 }
 
 # Django CORS Headers settings
