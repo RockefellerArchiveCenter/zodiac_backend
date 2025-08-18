@@ -64,6 +64,17 @@ class ViewTests(TestCase):
             response = self.client.get(reverse('package-events', kwargs={"pk": package_id}))
             self.assertEqual(len(response.data), expected_events)
 
+    def test_find_by_id_action(self):
+        """Asserts find by ID endpoint returns expected packages."""
+        for params, expected_packages in [
+                ("archivematica_uuid=0a9c6171-a18d-4ff6-b9e7-bef01aaded11", 0),
+                ("archivematica_uuid=0a9c6171-a18d-4ff6-b9e7-bef01aaded10", 2),
+                ("archivesspace_archival_object=/repositories/2/archival_objects/2153", 1),
+                ("archivesspace_digital_objects=/repositories/2/digital_objects/3", 1),
+                ("archivesspace_archival_object=/repositories/2/archival_objects/2153&archivematica_uuid=0a9c6171-a18d-4ff6-b9e7-bef01aaded10", 1)]:
+            response = self.client.get(f"{reverse('package-find-by-id')}?{params}")
+            self.assertEqual(len(response.data), expected_packages)
+
     def test_restart_service_view_missing_data(self, ):
         """Asserts check for required data."""
         output = self.client.post(reverse('restart-service'))
