@@ -44,6 +44,23 @@ class PackageViewSet(ModelViewSet):
             many=True)
         return Response(serializer.data)
 
+    @action(detail=False)
+    def find_by_id(self, request):
+        request_params = dict(request.GET)
+        final_params = {}
+        for key, value in request_params.items():
+            for v in value:
+                if key == 'archivesspace_digital_objects':
+                    final_params[key] = [v]
+                else:
+                    final_params[key] = v
+        queryset = Package.objects.filter(identifiers__contains=final_params)
+        serializer = PackageListSerializer(
+            queryset,
+            context={'request': request},
+            many=True)
+        return Response(serializer.data)
+
 
 class EventViewSet(ModelViewSet):
     queryset = Event.objects.all().order_by('-created')
