@@ -14,7 +14,7 @@ class PackageViewSet(ModelViewSet):
     """Handles Package data."""
     queryset = Package.objects.all().order_by('-created')
     serializer_class = PackageSerializer
-    filterset_fields = ['origin']
+    filterset_fields = ['origin', 'status']
 
     def get_serializer_class(self):
         if self.action == "list":
