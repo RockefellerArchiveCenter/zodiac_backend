@@ -15,9 +15,15 @@ class PackageSerializer(HyperlinkedModelSerializer):
 
 
 class PackageListSerializer(HyperlinkedModelSerializer):
+    error_identifier = PrimaryKeyRelatedField(
+        queryset=Event.objects.all(),
+        many=False)
+    error_message = CharField(source='error_identifier.message', read_only=True)
+
     class Meta:
         model = Package
-        fields = ['url', 'identifier', 'origin', 'title', 'status', 'created']
+        fields = ['url', 'identifier', 'origin', 'title', 'status', 'created', 'error_identifier', 'error_message']
+        datatables_always_serialize = ('error_identifier',)
 
 
 class EventSerializer(HyperlinkedModelSerializer):
