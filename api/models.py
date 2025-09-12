@@ -27,6 +27,14 @@ class Package(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     status = models.CharField(choices=STATUSES, default='IN PROCESS')
 
+    @property
+    def error_identifier(self):
+        last_event = self.event_set.all().order_by('-last_modified').first()
+        if getattr(last_event, 'outcome', None) == 'FAILURE':
+            return last_event
+        else:
+            return None
+
 
 class Event(models.Model):
     OUTCOMES = [
