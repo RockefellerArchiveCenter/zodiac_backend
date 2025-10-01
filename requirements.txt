@@ -4,12 +4,12 @@ asgiref==3.9.2
     #   django-cors-headers
 aws-assume-role-lib==2.10.0
     # via -r requirements.in
-boto3==1.40.38
+boto3==1.40.42
     # via
     #   -r requirements.in
     #   aws-assume-role-lib
     #   moto
-botocore==1.40.38
+botocore==1.40.42
     # via
     #   boto3
     #   moto
@@ -46,7 +46,7 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-markupsafe==3.0.2
+markupsafe==3.0.3
     # via
     #   jinja2
     #   werkzeug
@@ -60,7 +60,7 @@ python-dateutil==2.9.0.post0
     # via
     #   botocore
     #   moto
-pyyaml==6.0.2
+pyyaml==6.0.3
     # via responses
 requests==2.32.5
     # via
