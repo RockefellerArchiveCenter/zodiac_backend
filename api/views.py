@@ -1,10 +1,8 @@
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from .clients import AWSClient
 from .models import Event, Package
 from .serializers import (EventSerializer, PackageListSerializer,
                           PackageSerializer)
@@ -66,21 +64,3 @@ class EventViewSet(ModelViewSet):
     queryset = Event.objects.all().order_by('-created')
     serializer_class = EventSerializer
     filterset_fields = ['outcome', 'service']
-
-
-class RestartServiceView(APIView):
-    """Allows users to restart failed services."""
-
-    def post(self, request, **kwargs):
-        try:
-            service = request.data['service']
-            package_id = request.data['package_id']
-        except KeyError:
-            return Response("Post data must include both service and package_id.", status=500)
-
-        try:
-            client = AWSClient()
-            output = client.publish_restart_message(package_id, service)
-            return Response(output)
-        except Exception as e:
-            return Response(f"Error sending restart message: {e}", status=500)
