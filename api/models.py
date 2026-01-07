@@ -46,7 +46,9 @@ class Event(models.Model):
         ('digital_ingest_discovery', 'Discovery'),
         ('digital_ingest_assembly', 'Assembly'),
         ('digital_ingest_webhook', 'Webhook'),
-        ('digital_ingest_transformation', 'Transformation')
+        ('digital_ingest_transformation', 'Transformation'),
+        ('iiif_derivatives', 'IIIF Derivatives'),
+        ('iiif_manifests', 'IIIF Manifests')
     ]
     identifier = models.CharField(max_length=36, primary_key=True)
     outcome = models.CharField(choices=OUTCOMES)
