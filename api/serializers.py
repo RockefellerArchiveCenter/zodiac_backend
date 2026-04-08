@@ -18,7 +18,6 @@ class PackageListSerializer(HyperlinkedModelSerializer):
     error_identifier = PrimaryKeyRelatedField(
         queryset=Event.objects.all(),
         many=False)
-    error_message = CharField(source='error_identifier.message', read_only=True)
 
     class Meta:
         model = Package
