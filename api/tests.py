@@ -9,14 +9,14 @@ from .models import Event, Package
 class SignalTests(TestCase):
 
     def test_update_status(self):
-        """Asserts status field is correctly updated."""
+        """Asserts status and error message fields are correctly updated when error message is added."""
         package = Package.objects.create(
             identifier="f78742e5-6af9-4756-a94a-6cd297406d51",
             origin="aurora",
             title="Organizational Charts")
         self.assertEqual(package.status, 'IN PROCESS')
 
-        Event.objects.create(
+        error = Event.objects.create(
             identifier="f78742e5-6af9-4756-a94a-6cd297406d55",
             outcome="FAILURE",
             service="digital_ingest_discovery",
@@ -25,8 +25,9 @@ class SignalTests(TestCase):
         )
         package.refresh_from_db()
         self.assertEqual(package.status, "ERROR")
+        self.assertEqual(package.error_message, "Could not find file /tmp/f78742e5-6af9-4756-a94a-6cd297406d55 \n  in transform.py line 23")
 
-        Event.objects.create(
+        in_process = Event.objects.create(
             identifier="f78742e5-6af9-4756-a94a-6cd297406d56",
             outcome="COMPLETE",
             service="digital_ingest_discovery",
@@ -36,7 +37,7 @@ class SignalTests(TestCase):
         package.refresh_from_db()
         self.assertEqual(package.status, "IN PROCESS")
 
-        Event.objects.create(
+        complete = Event.objects.create(
             identifier="f78742e5-6af9-4756-a94a-6cd297406d57",
             outcome="SUCCESS",
             service="digital_ingest_transformation",
@@ -45,6 +46,22 @@ class SignalTests(TestCase):
         )
         package.refresh_from_db()
         self.assertEqual(package.status, "COMPLETE")
+        self.assertIsNone(package.error_message)
+
+        complete.delete()
+        package.refresh_from_db()
+        self.assertEqual(package.status, "IN PROCESS")
+        self.assertIsNone(package.error_message)
+
+        in_process.delete()
+        package.refresh_from_db()
+        self.assertEqual(package.status, "ERROR")
+        self.assertEqual(package.error_message, "Could not find file /tmp/f78742e5-6af9-4756-a94a-6cd297406d55 \n  in transform.py line 23")
+
+        error.delete()
+        package.refresh_from_db()
+        self.assertEqual(package.status, "IN PROCESS")
+        self.assertIsNone(package.error_message)
 
 
 class ViewTests(TestCase):
