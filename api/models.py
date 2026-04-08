@@ -26,6 +26,7 @@ class Package(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     status = models.CharField(choices=STATUSES, default='IN PROCESS')
+    error_message = models.CharField(max_length=255, null=True, blank=True)
 
     @property
     def error_identifier(self):
