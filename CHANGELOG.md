@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/RockefellerArchiveCenter/zodiac_backend/compare/v1.0.0...v1.1.0) (2026-06-24)
+
+
+### Features
+
+* add all identifiers to list serializer ([cf96cb6](https://github.com/RockefellerArchiveCenter/zodiac_backend/commit/cf96cb67ee56fdcdd8cb2a3037d2fec23c712ff0))
+* support searching of all identifiers ([6e97fbb](https://github.com/RockefellerArchiveCenter/zodiac_backend/commit/6e97fbb870077424a07d3cb9a4ee9fa3078d8fcc))
+
 ## 1.0.0 (2026-06-18)
 
 
