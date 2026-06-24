@@ -21,7 +21,7 @@ class PackageListSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = Package
-        fields = ['url', 'identifier', 'origin', 'title', 'status', 'created', 'error_identifier', 'error_message']
+        fields = ['url', 'identifier', 'identifiers', 'origin', 'title', 'status', 'created', 'error_identifier', 'error_message']
         datatables_always_serialize = ('error_identifier',)
 
 
