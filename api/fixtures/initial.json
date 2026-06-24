@@ -9,6 +9,7 @@
                 "aurora_package": "https://aurora.dev.rockarch.org/api/transfers/1631/?format=json",
                 "aurora_accession": "https://aurora.dev.rockarch.org/api/accessions/237/",
                 "archivesspace_accession": "/repositories/2/accessions/4172",
+                "archivesspace_ref_id": "2a3b05b1e35d48efa1fcd78b2e31ac26",
                 "archivesspace_resource": "/repositories/2/resources/123",
                 "archivematica_uuid": "0a9c6171-a18d-4ff6-b9e7-bef01aaded10"
             },
@@ -49,6 +50,7 @@
                 "archivesspace_resource": "/repositories/2/resources/123",
                 "archivesspace_group": "/repositories/2/archival_objects/4753",
                 "archivesspace_archival_object": "/repositories/2/archival_objects/2153",
+                "archivesspace_ref_id": "3581b60c338d4115878259c71552d1c9",
                 "archivematica_uuid": "0a9c6171-a18d-4ff6-b9e7-bef01aaded10",
                 "archivesspace_digital_objects": ["/repositories/2/digital_objects/3"]
             },
