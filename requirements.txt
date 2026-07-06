@@ -4,25 +4,25 @@ asgiref==3.11.1
     #   django-cors-headers
 aws-assume-role-lib==2.10.0
     # via -r requirements.in
-boto3==1.43.18
+boto3==1.43.38
     # via
     #   -r requirements.in
     #   aws-assume-role-lib
     #   moto
-botocore==1.43.18
+botocore==1.43.38
     # via
     #   boto3
     #   moto
     #   s3transfer
-certifi==2026.5.20
+certifi==2026.6.17
     # via requests
 cffi==2.0.0
     # via cryptography
 charset-normalizer==3.4.7
     # via requests
-cryptography==48.0.0
+cryptography==49.0.0
     # via moto
-django==5.2.14
+django==5.2.15
     # via
     #   -r requirements.in
     #   django-cors-headers
@@ -38,7 +38,7 @@ djangorestframework==3.17.1
     #   djangorestframework-datatables
 djangorestframework-datatables==0.7.2
     # via -r requirements.in
-idna==3.17
+idna==3.18
     # via requests
 jmespath==1.1.0
     # via
@@ -46,7 +46,7 @@ jmespath==1.1.0
     #   botocore
 markupsafe==3.0.3
     # via werkzeug
-moto==5.2.1
+moto==5.2.2
     # via -r requirements.in
 psycopg2==2.9.12
     # via -r requirements.in
@@ -62,7 +62,7 @@ requests==2.34.2
     #   responses
 responses==0.26.1
     # via moto
-s3transfer==0.18.0
+s3transfer==0.19.0
     # via boto3
 six==1.17.0
     # via python-dateutil
