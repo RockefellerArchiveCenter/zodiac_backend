@@ -39,6 +39,9 @@ jobs:
       - name: Start Docker containers
         run: docker compose up -d
 
+      - name: Wait for services to be ready
+        run: ./wait-for-it.sh $CONTAINER:$APPLICATION_PORT -- echo "$CONTAINER is ready"
+
       - name: Run tests
         run: docker compose exec -T $CONTAINER python manage.py test
 
