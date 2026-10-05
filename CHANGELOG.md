@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.4](https://github.com/RockefellerArchiveCenter/zodiac_backend/compare/v1.1.3...v1.1.4) (2026-10-05)
+
+
+### Bug Fixes
+
+* **deps:** Scheduled dependency updates ([ad59eb8](https://github.com/RockefellerArchiveCenter/zodiac_backend/commit/ad59eb86c76af3081e81875fb04fa6b9cceaf6c8))
+* **deps:** Scheduled dependency updates ([ad59eb8](https://github.com/RockefellerArchiveCenter/zodiac_backend/commit/ad59eb86c76af3081e81875fb04fa6b9cceaf6c8))
+* **deps:** Scheduled dependency updates ([7cb9491](https://github.com/RockefellerArchiveCenter/zodiac_backend/commit/7cb949117161bb8255b2d88a07944e443609eb67))
+* **deps:** Scheduled dependency updates ([7cb9491](https://github.com/RockefellerArchiveCenter/zodiac_backend/commit/7cb949117161bb8255b2d88a07944e443609eb67))
+* **deps:** Scheduled dependency updates ([197926f](https://github.com/RockefellerArchiveCenter/zodiac_backend/commit/197926f180e0e831912626cbc61b8849eb026775))
+
 ## [1.1.3](https://github.com/RockefellerArchiveCenter/zodiac_backend/compare/v1.1.2...v1.1.3) (2026-09-08)
 
 
